@@ -6,3 +6,5 @@ dev_history.R
 $run_dev.*
 ^README\.Rmd$
 ^LICENSE\.md$
+^\.travis\.yml$
+^appveyor\.yml$
