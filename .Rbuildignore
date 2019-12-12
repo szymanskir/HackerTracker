@@ -10,3 +10,5 @@ $run_dev.*
 ^appveyor\.yml$
 ^/home/szymanskir/Documents/HackerTracker/Dockerfile$
 ^Dockerfile$
+^renv$
+^renv\.lock$
