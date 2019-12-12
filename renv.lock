@@ -417,10 +417,15 @@
     },
     "packrat": {
       "Package": "packrat",
-      "Version": "0.5.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "aa1fbebb6ca276f933b9f77da6d02ef3"
+      "Version": "0.5.0-25",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rstudio",
+      "RemoteRepo": "packrat",
+      "RemoteRef": "master",
+      "RemoteSha": "448aafd176ec6cbde307f556c91b39e5a1c94f9d",
+      "Hash": "8478b934490c9e32769a160e78a73305"
     },
     "parsedate": {
       "Package": "parsedate",
