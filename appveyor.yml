@@ -24,7 +24,7 @@ environment:
 
 
 build_script: 
-  - Rscript -e "install.packages(c('devtools', 'renv'), repos='https://cran.r-project.org') --no-init-file"
+  - Rscript -e "install.packages(c('devtools', 'renv'), repos='https://cran.r-project.org')" --no-init-file
   - Rscript -e "renv::restore()"
 
 test_script:
