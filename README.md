@@ -7,57 +7,15 @@
 
 [![Travis build
 status](https://travis-ci.com/szymanskir/HackerTracker.svg?branch=master)](https://travis-ci.com/szymanskir/HackerTracker)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/szymanskir/HackerTracker?branch=master&svg=true)](https://ci.appveyor.com/project/szymanskir/HackerTracker)
 <!-- badges: end -->
 
-The goal of HackerTracker is to …
+## Manual setup
 
-## Installation
-
-You can install the released version of HackerTracker from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("HackerTracker")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+This project makes use of `renv` in order to export use dependencies and
+`rsconnect` for deployment. When opening the project R should
+automatically download the specified version of `renv`. Next in order to
+restore the used packages just run:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("szymanskir/HackerTracker")
+renv::restore()
 ```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(HackerTracker)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!

@@ -8,3 +8,8 @@ $run_dev.*
 ^LICENSE\.md$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^/home/szymanskir/Documents/HackerTracker/Dockerfile$
+^Dockerfile$
+^renv$
+^renv\.lock$
+^app\.R$
