@@ -8,4 +8,5 @@ cache:
 install:
   - Rscript -e "renv::restore()"
 script:
-  - Rscript -e 'devtools::check()'
+  - R CMD build .
+  - R CMD check HackerTracker_*.tar.gz
