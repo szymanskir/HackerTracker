@@ -12,3 +12,4 @@ $run_dev.*
 ^Dockerfile$
 ^renv$
 ^renv\.lock$
+^app\.R$
