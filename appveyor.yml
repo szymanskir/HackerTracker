@@ -22,11 +22,13 @@ environment:
 
 # Adapt as necessary starting from here
 
-build_script:
-  - travis-tool.sh install_deps
+
+build_script: 
+  - Rscript -e "install.packages(c('devtools', 'renv'), repos='https://cran.r-project.org')"
+  - Rscript -e "renv::restore()"
 
 test_script:
-  - travis-tool.sh run_tests
+  - Rscript -e 'devtools::check()'
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*
