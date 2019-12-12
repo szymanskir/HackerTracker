@@ -417,15 +417,10 @@
     },
     "packrat": {
       "Package": "packrat",
-      "Version": "0.5.0-25",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "rstudio",
-      "RemoteRepo": "packrat",
-      "RemoteRef": "master",
-      "RemoteSha": "448aafd176ec6cbde307f556c91b39e5a1c94f9d",
-      "Hash": "9b0543e1d626c4b2c66505e070df111a"
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2ebd34a38f4248281096cc723535b66d"
     },
     "parsedate": {
       "Package": "parsedate",
@@ -548,15 +543,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.9.2-6",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "renv",
-      "RemoteUsername": "rstudio",
-      "RemoteRef": "master",
-      "RemoteSha": "52a2710f386496f1e3c46bf2f7304b6cf31ade96",
-      "Hash": "b48cbe69fbe721cbec1cab86e4a8c2de"
+      "Version": "0.9.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5181d5f316c7a6589219866d640e004c"
     },
     "reshape2": {
       "Package": "reshape2",
@@ -609,15 +599,10 @@
     },
     "rsconnect": {
       "Package": "rsconnect",
-      "Version": "0.8.15-9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "rstudio",
-      "RemoteRepo": "rsconnect",
-      "RemoteRef": "master",
-      "RemoteSha": "7dd2453d1b73b30b06e88f7ebc286c6bb39f2645",
-      "Hash": "70fa06b5d8fe1dcf6807c274063cec8e"
+      "Version": "0.8.15",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5b0878a5685b9d44dec7659890587d78"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
