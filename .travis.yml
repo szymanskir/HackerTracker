@@ -12,6 +12,7 @@ script:
   - R CMD check HackerTracker_*.tar.gz
   
 deploy:
+  skip_cleanup: true
   provider: script
   script:
   - Rscript -e 'rsconnect::setAccountInfo(name=${SHINYAPP_NAME}, secret=${SHINYAPP_SECRET}, token=${SHINYAPPS_TOKEN})'
