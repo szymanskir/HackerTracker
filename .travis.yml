@@ -6,7 +6,6 @@ cache:
   - $HOME/.local/share/renv
   - $TRAVIS_BUILD_DIR/renv/library
 install:
-  - Rscript -e "install.packages(c('devtools', 'renv'), repos='https://cran.r-project.org')" --no-init-file
   - Rscript -e "renv::restore()"
 script:
   - Rscript -e 'devtools::check()'
