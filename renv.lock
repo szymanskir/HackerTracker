@@ -541,6 +541,13 @@
       "Repository": "CRAN",
       "Hash": "830aa73278dce9beba583bfe57a5c015"
     },
+    "renv": {
+      "Package": "renv",
+      "Version": "0.8.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4ee3e91b679fbd7102c1fd51f9a4bc59"
+    },
     "reshape2": {
       "Package": "reshape2",
       "Version": "1.4.3",
@@ -592,10 +599,15 @@
     },
     "rsconnect": {
       "Package": "rsconnect",
-      "Version": "0.8.15",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "649b33e97eb02dc7f8533a50d888ae29"
+      "Version": "0.8.15-9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rstudio",
+      "RemoteRepo": "rsconnect",
+      "RemoteRef": "master",
+      "RemoteSha": "7dd2453d1b73b30b06e88f7ebc286c6bb39f2645",
+      "Hash": "1b4b87739cff4904103ddf1dd6bab2b7"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
