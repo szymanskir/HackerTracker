@@ -2,7 +2,7 @@
 
 language: R
 cache:
-    directories:
+  directories:
   - $HOME/.local/share/renv
   - $TRAVIS_BUILD_DIR/renv/library
 install:
