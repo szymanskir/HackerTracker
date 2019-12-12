@@ -10,3 +10,7 @@ install:
 script:
   - R CMD build .
   - R CMD check HackerTracker_*.tar.gz
+  
+deploy:
+  provider: script
+  script: Rscript -e "rsconnect:deployApp()"
