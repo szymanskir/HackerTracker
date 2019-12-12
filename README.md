@@ -7,8 +7,6 @@
 
 [![Travis build
 status](https://travis-ci.com/szymanskir/HackerTracker.svg?branch=master)](https://travis-ci.com/szymanskir/HackerTracker)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/szymanskir/HackerTracker?branch=master&svg=true)](https://ci.appveyor.com/project/szymanskir/HackerTracker)
 <!-- badges: end -->
 
 The goal of HackerTracker is to …
@@ -32,11 +30,6 @@ devtools::install_github("szymanskir/HackerTracker")
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(HackerTracker)
-## basic example code
-```
 
 What is special about using `README.Rmd` instead of just `README.md`?
 You can include R chunks like so:
