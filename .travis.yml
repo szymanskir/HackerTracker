@@ -13,6 +13,8 @@ script:
   
 deploy:
   provider: script
-  script: Rscript -e "rsconnect:deployApp()"
+  script:
+  - Rscript -e 'rsconnect::setAccountInfo(name=${SHINYAPP_NAME}, secret=${SHINYAPP_SECRET}, token=${SHINYAPPS_TOKEN})'
+  - Rscript -e 'rsconnect::deployApp()'
   on:
     branch: feature/heroku_deployment
