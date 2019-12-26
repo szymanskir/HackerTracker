@@ -29,7 +29,6 @@ app_ui <- function() {
 }
 
 #' @import shiny
-#' @import shinydashboard
 golem_add_external_resources <- function(){
   
   addResourcePath(
