@@ -639,6 +639,13 @@
       "Repository": "CRAN",
       "Hash": "6ca23724bb2c804c1d0b3db4862a39c7"
     },
+    "shinydashboard": {
+      "Package": "shinydashboard",
+      "Version": "0.7.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "133639dc106955eee4ffb8ec73edac37"
+    },
     "sourcetools": {
       "Package": "sourcetools",
       "Version": "0.1.7",
