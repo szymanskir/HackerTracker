@@ -7,21 +7,10 @@ app_ui <- function() {
     # List the first level UI elements here 
     dashboardPage(
       dashboardHeader(title = "Hacker Tracker"),
-      dashboardSidebar(
-        sidebarMenu(
-          menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-          menuItem("Widgets", tabName = "widgets", icon = icon("th"))
-        )
-      ),
+      dashboardSidebar(disable = TRUE),
       dashboardBody(
-        # Boxes need to be put in a row (or column)
-        fluidRow(
-          box(plotOutput("plot1", height = 250)),
-          
-          box(
-            title = "Controls",
-            sliderInput("slider", "Number of observations:", 1, 100, 50)
-          )
+        fluidPage(
+          mod_general_overview_page_ui("general_page")
         )
       )
     )
@@ -29,8 +18,7 @@ app_ui <- function() {
 }
 
 #' @import shiny
-golem_add_external_resources <- function(){
-  
+golem_add_external_resources <- function() {
   addResourcePath(
     'www', system.file('app/www', package = 'HackerTracker')
   )
@@ -43,4 +31,5 @@ golem_add_external_resources <- function(){
     # Or for example, you can add shinyalert::useShinyalert() here
     #tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
   )
+  
 }
