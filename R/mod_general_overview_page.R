@@ -17,7 +17,11 @@ mod_general_overview_page_ui <- function(id){
   ns <- NS(id)
   tagList(
     fluidRow(
-    mod_stories_table_ui(ns("stories_table")),
+      mod_stories_table_ui(ns("stories_table")),
+      mod_sentiment_distribution_plot_ui(
+        id = ns("sentiment_plotter"), 
+        title = "Sentiment distribution"
+      )
     ),
     fluidRow(
       mod_comments_table_ui(ns("comments_table"))
@@ -52,9 +56,13 @@ mod_general_overview_page_server <- function(input, output, session) {
     
     top_stories <- value(top_stories_promise())
     selected_top_story <- top_stories[[stories_table$selected_story()]]
-    comments_promise(future(get_comments(selected_top_story)))
+    comments_with_sentiment_promise <- future(get_comments(selected_top_story)) %...>%
+      mutate(sentiment = calculate_sentiment(text) %>% round(digits = 2))
+      
+    comments_promise(comments_with_sentiment_promise)
   })
   
   stories_table <- callModule(mod_stories_table_server, "stories_table", stories_promise = top_stories_promise)
   comments_table <- callModule(mod_comments_table_server, "comments_table", comments_promise = comments_promise)
+  callModule(mod_sentiment_distribution_plot_server, "sentiment_plotter", comments_promise = comments_promise)
 }
