@@ -30,6 +30,9 @@ mod_general_overview_page_ui <- function(id){
 #' @rdname mod_general_overview_page
 #' @export
 #' @keywords internal
+#' 
+#' @importFrom future future value
+#' @importFrom hackeRnews get_comments get_top_stories
     
 mod_general_overview_page_server <- function(input, output, session) {
   ns <- session$ns
@@ -40,14 +43,16 @@ mod_general_overview_page_server <- function(input, output, session) {
   
   observe({
     data_fetching_interval_event()
-    top_stories_promise(future::future(hackeRnews::get_top_stories(max_items = 20)))
+    top_stories_promise(future(get_top_stories(max_items = 10)))
   })
   
   observe({
     req(stories_table$selected_story())
-    top_stories <- future::value(top_stories_promise())
+    req(top_stories_promise())
+    
+    top_stories <- value(top_stories_promise())
     selected_top_story <- top_stories[[stories_table$selected_story()]]
-    comments_promise(future::future(hackeRnews::get_comments(selected_top_story)))
+    comments_promise(future(get_comments(selected_top_story)))
   })
   
   stories_table <- callModule(mod_stories_table_server, "stories_table", stories_promise = top_stories_promise)

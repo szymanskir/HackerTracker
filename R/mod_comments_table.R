@@ -36,15 +36,20 @@ mod_comments_table_ui <- function(id){
 #' @rdname mod_comments_table
 #' @export
 #' @keywords internal
+#' 
+#' @import dplyr
+#' @import stringr
+#' @importFrom DT datatable, renderDataTable
     
 mod_comments_table_server <- function(input, output, session, comments_promise) {
   ns <- session$ns
   
-  output$comments_table <- DT::renderDataTable({
+  output$comments_table <- renderDataTable({
     req(comments_promise())
-    comments_data <- future::value(comments_promise())
-    comments_data$text <- stringr::str_trunc(comments_data$text, 100)
-    DT::datatable(comments_data[, c("text", "time", "by")], selection = "single")
+    comments_promise() %...>%
+      mutate(text = str_trunc(text, 100)) %...>%
+      select(text, time, by) %...T>% 
+      datatable(selection = "single")
   })
   
   list(
