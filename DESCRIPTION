@@ -7,11 +7,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    shiny,
-    shinydashboard,
+    DT,
+    future,
     golem,
-    processx,
-    pkgload
+    hackeRnews,
+    shiny,
+    shinycssloaders,
+    shinydashboard,
+    stringr
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
