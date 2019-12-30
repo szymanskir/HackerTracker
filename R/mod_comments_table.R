@@ -26,7 +26,7 @@ mod_comments_table_ui <- function(id){
       solidHeader = TRUE,
       collapsible = TRUE,
       status = "primary",
-      col = 4
+      width = NULL
     )
   )
 }

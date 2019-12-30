@@ -22,7 +22,7 @@ mod_sentiment_distribution_plot_ui <- function(id, title) {
     box(
       withSpinner(plotOutput(ns("sentiment_plot"))),
       title = title,
-      col = 4,
+      width = NULL,
       solidHeader = TRUE,
       collapsible = TRUE,
       status = "primary"

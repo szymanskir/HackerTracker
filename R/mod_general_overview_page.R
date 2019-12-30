@@ -13,19 +13,38 @@
 #' @keywords internal
 #' @export 
 #' @importFrom shiny NS tagList 
-mod_general_overview_page_ui <- function(id){
+mod_general_overview_page_ui <- function(id) {
   ns <- NS(id)
   tagList(
     fluidRow(
-      mod_stories_table_ui(ns("stories_table")),
-      mod_sentiment_distribution_plot_ui(
-        id = ns("sentiment_plotter"), 
-        title = "Sentiment distribution"
+      column(
+        width = 4,
+        mod_stories_table_ui(ns("stories_table")),
+        mod_comments_table_ui(ns("comments_table"))
+      ),
+      column(
+        width = 4,
+        mod_sentiment_distribution_plot_ui(
+          id = ns("sentiment_plotter"), 
+          title = "Sentiment distribution"
+        ),
+        mod_comments_graph_plot_ui(
+          id = ns("comments_graph_plot"),
+          title = "Comments graph" 
+        )
+      ),
+      column(
+        width = 4,
+        mod_wordcloud_plot_ui(
+          id = ns("wordcloud_plot"),
+          title = "Story buzzwords"
+        ),
+        box(
+          title = "AAA",
+          width = NULL
+        )
       )
-    ),
-    fluidRow(
-      mod_comments_table_ui(ns("comments_table"))
-    ),
+    )
   )
 }
     
@@ -65,4 +84,6 @@ mod_general_overview_page_server <- function(input, output, session) {
   stories_table <- callModule(mod_stories_table_server, "stories_table", stories_promise = top_stories_promise)
   comments_table <- callModule(mod_comments_table_server, "comments_table", comments_promise = comments_promise)
   callModule(mod_sentiment_distribution_plot_server, "sentiment_plotter", comments_promise = comments_promise)
+  callModule(mod_comments_graph_plot_server, "comments_graph_plot", comments_promise = comments_promise, selected_comment = comments_table$selected_row)
+  callModule(mod_wordcloud_plot_server, "wordcloud_plot", comments_promise = comments_promise)
 }
