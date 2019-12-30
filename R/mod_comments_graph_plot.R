@@ -23,7 +23,7 @@ mod_comments_graph_plot_ui <- function(id, title) {
       withSpinner(
         sigmajsOutput(ns("comments_graph_plot"))
       ),
-      title = title,
+      title = span(tagList(icon("project-diagram"), title)),
       solidHeader = TRUE,
       collapsible = TRUE,
       width = NULL,

@@ -21,7 +21,7 @@ mod_sentiment_distribution_plot_ui <- function(id, title) {
   tagList(
     box(
       withSpinner(plotOutput(ns("sentiment_plot"))),
-      title = title,
+      title = span(tagList(icon("chart-area"), title)),
       width = NULL,
       solidHeader = TRUE,
       collapsible = TRUE,

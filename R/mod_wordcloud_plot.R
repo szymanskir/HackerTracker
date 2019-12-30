@@ -21,7 +21,7 @@ mod_wordcloud_plot_ui <- function(id, title){
   tagList(
     box(
       withSpinner(plotOutput(ns("wordcloud_plot"))),
-      title = title,
+      title = span(tagList(icon("cloud"), title)),
       width = NULL,
       solidHeader = TRUE,
       collapsible = TRUE,

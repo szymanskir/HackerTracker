@@ -41,9 +41,10 @@ mod_general_overview_page_ui <- function(id) {
         ),
         box(
           h4(textOutput(ns("hovered_node_text"))),
-          title = "Hovered node text",
+          title = span(tagList(icon("file-word"), "Hovered node text")),
           width = NULL,
           solidHeader = TRUE,
+          collapsible = TRUE,
           status = "primary"
         )
       )

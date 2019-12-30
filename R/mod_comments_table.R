@@ -22,7 +22,7 @@ mod_comments_table_ui <- function(id){
       withSpinner(
         DT::dataTableOutput(ns("comments_table"))
       ),
-      title = "Comments",
+      title = span(tagList(icon("comments"), "Comments")),
       solidHeader = TRUE,
       collapsible = TRUE,
       status = "primary",

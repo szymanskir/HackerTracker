@@ -22,7 +22,7 @@ mod_stories_table_ui <- function(id) {
       withSpinner(
         DT::dataTableOutput(ns("stories_table"))
       ),
-      title = "Stories",
+      title = span(tagList(icon("newspaper"), "Stories")),
       solidHeader = TRUE,
       collapsible = TRUE,
       status = "primary",
