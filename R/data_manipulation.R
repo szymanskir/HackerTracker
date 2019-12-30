@@ -11,7 +11,7 @@
 #' @import textdata
 #' @import tidytext
 calculate_sentiment <- function(sentences) {
-  data("stop_words") 
+  data(stop_words, package = "tidytext")
   sentiment_index <- get_sentiments("afinn")
   
   calculate_single_sentence_sentiment <- function(sentence) {
@@ -45,7 +45,7 @@ calculate_sentiment <- function(sentences) {
 #' @import textdata
 #' @import tidytext
 calculate_word_frequencies <- function(sentences) {
-  data("stop_words") 
+  data(stop_words, package = "tidytext")
   words <- sentences %>% 
     str_replace_all('[^A-Z|a-z]', ' ') %>%
     str_to_lower() %>%

@@ -69,6 +69,7 @@ mod_comments_graph_plot_server <- function(input, output, session, comments_prom
         sg_nodes(graph_data$nodes, id, label, size, color) %>% 
         sg_edges(graph_data$edges, id, source, target) %>% 
         sg_layout(layout = igraph::layout_as_tree) %>% 
+        sg_events("hoverNode") %>% 
         sg_settings(
           labelThreshold = 100,
           edgeColor = "default",
@@ -79,4 +80,8 @@ mod_comments_graph_plot_server <- function(input, output, session, comments_prom
         )
     }
   })
+  
+  list(
+    hovered_node = reactive({input$comments_graph_plot_over_node})
+  )
 }

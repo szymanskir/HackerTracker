@@ -40,8 +40,11 @@ mod_general_overview_page_ui <- function(id) {
           title = "Story buzzwords"
         ),
         box(
-          title = "AAA",
-          width = NULL
+          h4(textOutput(ns("hovered_node_text"))),
+          title = "Hovered node text",
+          width = NULL,
+          solidHeader = TRUE,
+          status = "primary"
         )
       )
     )
@@ -54,8 +57,12 @@ mod_general_overview_page_ui <- function(id) {
 #' @export
 #' @keywords internal
 #' 
+#' 
 #' @importFrom future future value
 #' @importFrom hackeRnews get_comments get_top_stories
+#' @importFrom rvest html_text
+#' @importFrom xml2 read_html
+#' 
     
 mod_general_overview_page_server <- function(input, output, session) {
   ns <- session$ns
@@ -63,6 +70,20 @@ mod_general_overview_page_server <- function(input, output, session) {
   top_stories_promise <- reactiveVal()
   comments_promise <- reactiveVal()
   data_fetching_interval_event <- reactiveTimer(DATA_FETCHING_INTERVAL)
+  
+  output$hovered_node_text <- renderText({
+    req(comments_graph$hovered_node())
+    req(comments_promise())
+    
+    comments_promise() %...>%
+      filter(id == comments_graph$hovered_node()$id) %...T>%
+      print() %...>%
+      pull(text) %...>% {
+        html <- sprintf("<body>%s<body>", .)
+        read_html(html) %>% 
+          html_text()
+      }
+  })
   
   observe({
     data_fetching_interval_event()
@@ -81,9 +102,15 @@ mod_general_overview_page_server <- function(input, output, session) {
     comments_promise(comments_with_sentiment_promise)
   })
   
+  # Modules
   stories_table <- callModule(mod_stories_table_server, "stories_table", stories_promise = top_stories_promise)
   comments_table <- callModule(mod_comments_table_server, "comments_table", comments_promise = comments_promise)
   callModule(mod_sentiment_distribution_plot_server, "sentiment_plotter", comments_promise = comments_promise)
-  callModule(mod_comments_graph_plot_server, "comments_graph_plot", comments_promise = comments_promise, selected_comment = comments_table$selected_row)
+  comments_graph <- callModule(
+    mod_comments_graph_plot_server, 
+    "comments_graph_plot", 
+    comments_promise = comments_promise, 
+    selected_comment = comments_table$selected_row
+  )
   callModule(mod_wordcloud_plot_server, "wordcloud_plot", comments_promise = comments_promise)
 }
