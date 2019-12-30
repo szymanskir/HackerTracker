@@ -61,7 +61,7 @@ calculate_word_frequencies <- function(sentences) {
 
 
 comments_to_graph_data <- function(comments) {
-  color_palette <- colorRampPalette(c('red','blue'))
+  color_palette <- grDevices::colorRampPalette(c('red','blue'))
   
   root_node <- setdiff(comments$parent, comments$id) %>% 
     unique()

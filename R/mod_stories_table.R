@@ -38,12 +38,11 @@ mod_stories_table_ui <- function(id) {
 #' @keywords internal
 #' 
 #' @import promises
-#' @importFrom DT datatable renderDataTable
     
 mod_stories_table_server <- function(input, output, session, stories_promise) {
   ns <- session$ns
   
-  output$stories_table <- renderDataTable({
+  output$stories_table <- DT::renderDataTable({
     req(stories_promise())
     stories_promise() %...>%
       lapply(function(item) {
@@ -54,7 +53,7 @@ mod_stories_table_server <- function(input, output, session, stories_promise) {
         )
       }) %...>%
       do.call(rbind, .) %...>%
-      datatable(selection = "single")
+      DT::datatable(selection = "single")
   })
   
   list(

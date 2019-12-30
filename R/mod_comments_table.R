@@ -39,18 +39,17 @@ mod_comments_table_ui <- function(id){
 #' 
 #' @import dplyr
 #' @import stringr
-#' @importFrom DT datatable, renderDataTable
     
 mod_comments_table_server <- function(input, output, session, comments_promise) {
   ns <- session$ns
   
-  output$comments_table <- renderDataTable({
+  output$comments_table <- DT::renderDataTable({
     req(comments_promise())
     
     comments_promise() %...>%
       mutate(text = str_trunc(text, 80)) %...>%
       select(time, by, sentiment) %...>% 
-      datatable(selection = "single")
+      DT::datatable(selection = "single")
   })
   
   list(
