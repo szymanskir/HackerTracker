@@ -61,8 +61,6 @@ mod_general_overview_page_ui <- function(id) {
 #' 
 #' @importFrom future future value
 #' @importFrom hackeRnews get_comments get_top_stories
-#' @importFrom rvest html_text
-#' @importFrom xml2 read_html
 #' 
     
 mod_general_overview_page_server <- function(input, output, session) {
@@ -77,13 +75,9 @@ mod_general_overview_page_server <- function(input, output, session) {
     req(comments_promise())
     
     comments_promise() %...>%
-      filter(id == comments_graph$hovered_node()$id) %...T>%
-      print() %...>%
-      pull(text) %...>% {
-        html <- sprintf("<body>%s<body>", .)
-        read_html(html) %>% 
-          html_text()
-      }
+      filter(id == comments_graph$hovered_node()$id) %...>%
+      pull(text) %...>% 
+      remove_html()
   })
   
   observe({
