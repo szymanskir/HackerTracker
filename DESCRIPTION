@@ -23,7 +23,7 @@ Imports:
     shinydashboard,
     sigmajs,
     stringr,
-    textdata,
+    tidyr,
     tidytext,
     xml2
 RoxygenNote: 6.1.1
