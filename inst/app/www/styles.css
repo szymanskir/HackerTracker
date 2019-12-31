@@ -27,7 +27,4 @@
 }
 .box.box-solid.box-primary, .box.box-primary {
   border-color: var(--primary-color);
-  border-left-color: var(--primary-color);
-  border-right-color: var(--primary-color);
-  border-top-color: var(--primary-color);
 }
