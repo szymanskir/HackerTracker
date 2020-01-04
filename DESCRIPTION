@@ -7,11 +7,25 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    shiny,
-    shinydashboard,
+    dplyr,
+    DT,
+    future,
+    ggplot2,
     golem,
-    processx,
-    pkgload
+    ggwordcloud,
+    grDevices,
+    hackeRnews,
+    igraph,
+    promises,
+    rvest,
+    shiny,
+    shinycssloaders,
+    shinydashboard,
+    sigmajs,
+    stringr,
+    tidyr,
+    tidytext,
+    xml2
 RoxygenNote: 6.1.1
 Suggests: 
     testthat

@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #FF6600;
+  --secondary-color: #F6F6EF;
+}
+
+.box-body {
+ background-color: var(--secondary-color)
+}
+
+.skin-blue .main-header .logo {
+  background-color: var(--primary-color);
+  color: black;
+  font-weight: bold;
+}
+
+.skin-blue .main-header .logo:hover {
+  background-color: var(--primary-color);
+}
+
+.skin-blue .main-header .navbar {
+  background-color: var(--primary-color);
+}
+
+.box.box-solid.box-primary>.box-header {
+  color: black;
+  background: var(--primary-color);
+}
+.box.box-solid.box-primary, .box.box-primary {
+  border-color: var(--primary-color);
+}

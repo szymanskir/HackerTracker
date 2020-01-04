@@ -9,5 +9,6 @@ golem::detach_all_attached()
 golem::document_and_reload()
 
 # Run the application
+future::plan(future::multiprocess)
 HackerTracker::run_app()
 
