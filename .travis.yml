@@ -12,7 +12,6 @@ script:
   - R CMD check HackerTracker_*.tar.gz
   
 deploy:
-  skip_cleanup: true
   provider: script
   script: bash deploy.sh
   on:

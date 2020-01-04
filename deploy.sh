@@ -1,4 +1,6 @@
 rm .Rprofile
+rm -rf renv
+Rscript -e 'install.packages(c("renv", "devtools"))'
 Rscript -e 'renv::restore()'
 Rscript -e 'devtools::install_github("JohnCoene/sigmajs", force = TRUE)'
 Rscript -e 'rsconnect::setAccountInfo(name=Sys.getenv("SHINYAPP_NAME"), secret=Sys.getenv("SHINYAPP_SECRET"), token=Sys.getenv("SHINYAPP_TOKEN"))'
