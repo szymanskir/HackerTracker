@@ -19,8 +19,14 @@ mod_stories_table_ui <- function(id) {
   ns <- NS(id)
   tagList(
     box(
-      withSpinner(
-        DT::dataTableOutput(ns("stories_table"))
+      actionLink(ns("help"), "Start here!"),
+      rintrojs::introBox(
+        withSpinner(
+          DT::dataTableOutput(ns("stories_table"))
+        ),
+        data.step = 1,
+        data.intro = "Select row to see statistics.",
+        data.position = "right"
       ),
       title = span(tagList(icon("newspaper"), "Stories")),
       solidHeader = TRUE,
@@ -54,6 +60,10 @@ mod_stories_table_server <- function(input, output, session, stories_promise) {
       }) %...>%
       do.call(rbind, .) %...>%
       DT::datatable(selection = "single")
+  })
+  
+  observeEvent(input$help, {
+    rintrojs::introjs(session)
   })
   
   list(

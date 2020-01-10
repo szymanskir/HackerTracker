@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "3.6.1",
+    "Version": "3.6.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -699,6 +699,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "977cce19c029acc6d88a1c861f224819"
+    },
+    "rintrojs": {
+      "Package": "rintrojs",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "15a8768183fd609cee75e4789da27621"
     },
     "rlang": {
       "Package": "rlang",
