@@ -17,6 +17,7 @@ mod_general_overview_page_ui <- function(id) {
   ns <- NS(id)
   tagList(
     fluidRow(
+      rintrojs::introjsUI(),
       column(
         width = 4,
         mod_stories_table_ui(ns("stories_table")),

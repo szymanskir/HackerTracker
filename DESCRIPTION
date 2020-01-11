@@ -25,7 +25,8 @@ Imports:
     stringr,
     tidyr,
     tidytext,
-    xml2
+    xml2,
+    rintrojs
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
