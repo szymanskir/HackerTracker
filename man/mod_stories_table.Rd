@@ -7,7 +7,7 @@
 \usage{
 mod_stories_table_ui(id)
 
-mod_stories_table_server(input, output, session, stories_promise)
+mod_stories_table_server(input, output, session)
 }
 \arguments{
 \item{id}{shiny id}
