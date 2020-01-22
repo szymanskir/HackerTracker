@@ -93,7 +93,7 @@ mod_general_overview_page_server <- function(input, output, session) {
     top_stories <- value(top_stories_promise())
     selected_top_story <- top_stories[[stories_table$selected_story()]]
     comments_with_sentiment_promise <- future(get_comments(selected_top_story)) %...>%
-      mutate(sentiment = calculate_sentiment(text) %>% round(digits = 2))
+      mutate(sentiment = calculate_sentiment(text) %>% round(digits = 2) %>% min(10) %>% max(-10))
       
     comments_promise(comments_with_sentiment_promise)
   })
