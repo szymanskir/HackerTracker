@@ -74,7 +74,7 @@ mod_general_overview_page_server <- function(input, output, session) {
     req(comments_graph$hovered_node())
     req(comments_promise())
     
-    comments_promise() %...>% 
+    comments_promise() %...>%
       filter(id == comments_graph$hovered_node()$id) %...>%
       pull(text) %...>%
       remove_html()
