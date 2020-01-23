@@ -56,33 +56,33 @@ mod_stories_table_ui <- function(id) {
 mod_stories_table_server <- function(input, output, session) {
   ns <- session$ns
   
-  dataSource <- reactiveVal()
+  data_source <- reactiveVal()
   selected_story_r <- reactiveVal()
   
   observeEvent(input$story_type, {
     req(input$story_type)
     selected_story_r(NULL)
     if (input$story_type == "top") {
-      dataSource(future(get_top_stories(max_items = STORIES_PER_STORY_TYPE)))
+      data_source(future(get_top_stories(max_items = STORIES_PER_STORY_TYPE)))
     }
     else if (input$story_type == "best") {
-      dataSource(future(get_best_stories(max_items = STORIES_PER_STORY_TYPE)))
+      data_source(future(get_best_stories(max_items = STORIES_PER_STORY_TYPE)))
     }
     else if (input$story_type == "new") {
-      dataSource(future(get_new_stories(max_items = STORIES_PER_STORY_TYPE)))
+      data_source(future(get_new_stories(max_items = STORIES_PER_STORY_TYPE)))
     }
   })
   
   observeEvent(input$stories_table_row_last_clicked, {
-    stories <- value(dataSource())
+    stories <- value(data_source())
     selected_story_r(stories[[input$stories_table_row_last_clicked]])
   }, ignoreInit = TRUE, ignoreNULL = TRUE)
   
   
   
   output$stories_table <- DT::renderDataTable({
-    req(dataSource())
-    dataSource() %...>%
+    req(data_source())
+    data_source() %...>%
       lapply(function(item) {
         data.frame(
           title = item$title,
