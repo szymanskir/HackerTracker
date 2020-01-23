@@ -74,10 +74,14 @@ mod_general_overview_page_server <- function(input, output, session) {
     req(comments_graph$hovered_node())
     req(comments_promise())
     
-    comments_promise() %...>%
-      filter(id == comments_graph$hovered_node()$id) %...>%
-      pull(text) %...>% 
-      remove_html()
+    comments_promise() %...>% {
+        comments <- .
+        validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
+        comments %>% pull(text)
+      } %...>%
+        filter(id == comments_graph$hovered_node()$id) %...>%
+        pull(text) %...>%
+        remove_html()
   })
   
   observe({
@@ -91,8 +95,16 @@ mod_general_overview_page_server <- function(input, output, session) {
   observeEvent(stories_table$selected_story(), {
     selected_story <- stories_table$selected_story()
     req(selected_story)
-    comments_with_sentiment_promise <- future(get_comments(selected_story)) %...>%
-      mutate(sentiment = clip(calculate_sentiment(text), -10, 10) %>% round(digits = 2))
+    comments_with_sentiment_promise <- future(get_comments(selected_story)) %...>% {
+      comments <- .
+      if (!is.null(comments)) {
+        mutate(comments, sentiment = clip(calculate_sentiment(text), -10, 10) %>% round(digits = 2))
+      }
+      # else {
+      #   NULL
+      # }
+    }
+      
     comments_promise(comments_with_sentiment_promise)
   }
   , ignoreInit = TRUE)
@@ -102,9 +114,9 @@ mod_general_overview_page_server <- function(input, output, session) {
   comments_table <- callModule(mod_comments_table_server, "comments_table", comments_promise = comments_promise)
   callModule(mod_sentiment_distribution_plot_server, "sentiment_plotter", comments_promise = comments_promise)
   comments_graph <- callModule(
-    mod_comments_graph_plot_server, 
-    "comments_graph_plot", 
-    comments_promise = comments_promise, 
+    mod_comments_graph_plot_server,
+    "comments_graph_plot",
+    comments_promise = comments_promise,
     selected_comment = comments_table$selected_row
   )
   callModule(mod_wordcloud_plot_server, "wordcloud_plot", comments_promise = comments_promise)

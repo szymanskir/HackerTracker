@@ -63,6 +63,7 @@ mod_comments_graph_plot_server <- function(input, output, session, comments_prom
     
     comments_promise() %...>% {
       comments <- .
+      validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
       graph_data <- comments_to_graph_data(comments)
       
       sigmajs() %>% 

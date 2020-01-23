@@ -23,7 +23,7 @@ mod_stories_table_ui <- function(id) {
       selectInput(
         ns("story_type"),
         "Select stories type:",
-        choices = c('Top stories' = 'top', 'Best stories' = 'best', 'New Stories' = 'new'),
+        choices = c('Top stories' = 'top', 'Best stories' = 'best', 'New stories' = 'new'),
         selected = 'top'
       ),
       rintrojs::introBox(
