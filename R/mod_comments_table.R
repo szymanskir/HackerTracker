@@ -46,11 +46,7 @@ mod_comments_table_server <- function(input, output, session, comments_promise) 
   output$comments_table <- DT::renderDataTable({
     req(comments_promise())
     
-    comments_promise() %...>% {
-        comments <- .
-        validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
-        comments %>% pull(text)
-      } %...>%
+    comments_promise() %...>% 
         mutate(text = str_trunc(text, 80)) %...>%
         select(time, by, sentiment) %...>% 
         DT::datatable(selection = "single")

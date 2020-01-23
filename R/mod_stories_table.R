@@ -62,15 +62,14 @@ mod_stories_table_server <- function(input, output, session) {
   observeEvent(input$story_type, {
     req(input$story_type)
     selected_story_r(NULL)
-    max_items <- 10
     if (input$story_type == "top") {
-      dataSource(future(get_top_stories(max_items = max_items)))
+      dataSource(future(get_top_stories(max_items = STORIES_PER_STORY_TYPE)))
     }
     else if (input$story_type == "best") {
-      dataSource(future(get_best_stories(max_items = max_items)))
+      dataSource(future(get_best_stories(max_items = STORIES_PER_STORY_TYPE)))
     }
     else if (input$story_type == "new") {
-      dataSource(future(get_new_stories(max_items = max_items)))
+      dataSource(future(get_new_stories(max_items = STORIES_PER_STORY_TYPE)))
     }
   })
   

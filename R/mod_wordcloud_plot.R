@@ -43,11 +43,7 @@ mod_wordcloud_plot_server <- function(input, output, session, comments_promise) 
   
   output$wordcloud_plot <- renderPlot({
     req(comments_promise())
-    comments_promise() %...>% {
-        comments <- .
-        validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
-        comments %>% pull(text)
-      } %...>%
+    comments_promise() %...>% 
       calculate_word_frequencies() %...>%
       arrange(Freq) %...>%
       filter(Freq > 1) %...>%

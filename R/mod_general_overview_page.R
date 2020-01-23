@@ -77,7 +77,6 @@ mod_general_overview_page_server <- function(input, output, session) {
     comments_promise() %...>% {
         comments <- .
         validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
-        comments %>% pull(text)
       } %...>%
         filter(id == comments_graph$hovered_node()$id) %...>%
         pull(text) %...>%
@@ -97,12 +96,10 @@ mod_general_overview_page_server <- function(input, output, session) {
     req(selected_story)
     comments_with_sentiment_promise <- future(get_comments(selected_story)) %...>% {
       comments <- .
+      validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
       if (!is.null(comments)) {
         mutate(comments, sentiment = clip(calculate_sentiment(text), -10, 10) %>% round(digits = 2))
       }
-      # else {
-      #   NULL
-      # }
     }
       
     comments_promise(comments_with_sentiment_promise)
