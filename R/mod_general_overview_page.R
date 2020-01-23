@@ -95,7 +95,10 @@ mod_general_overview_page_server <- function(input, output, session) {
       comments <- .
       validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
       if (!is.null(comments)) {
-        mutate(comments, sentiment = clip(calculate_sentiment(text), -10, 10) %>% round(digits = 2))
+        mutate(
+          comments,
+          sentiment = clip(calculate_sentiment(text), -SENTIMENT_RANGE, SENTIMENT_RANGE) %>% round(digits = 2)
+        )
       }
     }
       
