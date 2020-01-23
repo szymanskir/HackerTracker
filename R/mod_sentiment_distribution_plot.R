@@ -43,10 +43,10 @@ mod_sentiment_distribution_plot_server <- function(input, output, session, comme
   output$sentiment_plot <- renderPlot({
     req(comments_promise())
     comments_promise() %...>% {
-      ggplot(., aes(x = sentiment)) + 
-        geom_density(alpha = 0.5, fill = "lightblue") +
-        xlim(-10, 10)
-    }
+        ggplot(., aes(x = sentiment)) + 
+          geom_density(alpha = 0.5, fill = "lightblue") +
+          xlim(-10, 10)
+      }
   })
 }
     

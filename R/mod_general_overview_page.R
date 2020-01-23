@@ -74,13 +74,10 @@ mod_general_overview_page_server <- function(input, output, session) {
     req(comments_graph$hovered_node())
     req(comments_promise())
     
-    comments_promise() %...>% {
-        comments <- .
-        validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
-      } %...>%
-        filter(id == comments_graph$hovered_node()$id) %...>%
-        pull(text) %...>%
-        remove_html()
+    comments_promise() %...>% 
+      filter(id == comments_graph$hovered_node()$id) %...>%
+      pull(text) %...>%
+      remove_html()
   })
   
   observe({
