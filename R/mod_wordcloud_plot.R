@@ -43,11 +43,12 @@ mod_wordcloud_plot_server <- function(input, output, session, comments_promise) 
   
   output$wordcloud_plot <- renderPlot({
     req(comments_promise())
-    
     comments_promise() %...>%
       pull(text) %...>%
       calculate_word_frequencies() %...>%
+      arrange(Freq) %...>%
       filter(Freq > 1) %...>%
+      top_n(42) %...>%
       mutate(color = factor(sample(10, length(words), replace = TRUE))) %...>% {
         ggplot(., aes(label = words, size = Freq, color = color)) + 
           geom_text_wordcloud(rm_outside = TRUE) +

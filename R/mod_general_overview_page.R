@@ -61,13 +61,12 @@ mod_general_overview_page_ui <- function(id) {
 #' 
 #' 
 #' @importFrom future future value
-#' @importFrom hackeRnews get_comments get_top_stories
+#' @importFrom hackeRnews get_comments
 #' 
     
 mod_general_overview_page_server <- function(input, output, session) {
   ns <- session$ns
   
-  top_stories_promise <- reactiveVal()
   comments_promise <- reactiveVal()
   data_fetching_interval_event <- reactiveTimer(DATA_FETCHING_INTERVAL)
   
@@ -77,35 +76,44 @@ mod_general_overview_page_server <- function(input, output, session) {
     
     comments_promise() %...>%
       filter(id == comments_graph$hovered_node()$id) %...>%
-      pull(text) %...>% 
+      pull(text) %...>%
       remove_html()
   })
   
   observe({
     data_fetching_interval_event()
-    top_stories_promise(future(get_top_stories(max_items = 10)))
   })
   
-  observe({
-    req(stories_table$selected_story())
-    req(top_stories_promise())
-    
-    top_stories <- value(top_stories_promise())
-    selected_top_story <- top_stories[[stories_table$selected_story()]]
-    comments_with_sentiment_promise <- future(get_comments(selected_top_story)) %...>%
-      mutate(sentiment = calculate_sentiment(text) %>% round(digits = 2))
+  clip <- function(x, min_value, max_value) {
+    ifelse(x <= min_value,  min_value, ifelse(x >= max_value, max_value, x))
+  }
+
+  observeEvent(stories_table$selected_story(), {
+    selected_story <- stories_table$selected_story()
+    req(selected_story)
+    comments_with_sentiment_promise <- future(get_comments(selected_story)) %...>% {
+      comments <- .
+      validate(need(!is.null(comments), "Unfortunately there are no comments for this story."))
+      if (!is.null(comments)) {
+        mutate(
+          comments,
+          sentiment = clip(calculate_sentiment(text), -SENTIMENT_RANGE, SENTIMENT_RANGE) %>% round(digits = 2)
+        )
+      }
+    }
       
     comments_promise(comments_with_sentiment_promise)
-  })
+  }
+  , ignoreInit = TRUE)
   
   # Modules
-  stories_table <- callModule(mod_stories_table_server, "stories_table", stories_promise = top_stories_promise)
+  stories_table <- callModule(mod_stories_table_server, "stories_table")
   comments_table <- callModule(mod_comments_table_server, "comments_table", comments_promise = comments_promise)
   callModule(mod_sentiment_distribution_plot_server, "sentiment_plotter", comments_promise = comments_promise)
   comments_graph <- callModule(
-    mod_comments_graph_plot_server, 
-    "comments_graph_plot", 
-    comments_promise = comments_promise, 
+    mod_comments_graph_plot_server,
+    "comments_graph_plot",
+    comments_promise = comments_promise,
     selected_comment = comments_table$selected_row
   )
   callModule(mod_wordcloud_plot_server, "wordcloud_plot", comments_promise = comments_promise)

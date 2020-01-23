@@ -44,7 +44,8 @@ mod_sentiment_distribution_plot_server <- function(input, output, session, comme
     req(comments_promise())
     comments_promise() %...>% {
         ggplot(., aes(x = sentiment)) + 
-          geom_density(alpha = 0.5, fill = "lightblue")
+          geom_density(alpha = 0.5, fill = "lightblue") +
+          xlim(-SENTIMENT_RANGE, SENTIMENT_RANGE)
       }
   })
 }
